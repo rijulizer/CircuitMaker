@@ -26,6 +26,7 @@ class LogicGates:
 
         # Using universal gates
         # return self.ug.U_NAND(inp[0])
+        
     
     def AND(self, *inp):
         """
@@ -44,6 +45,7 @@ class LogicGates:
 
         # Using universal gates
         # return self.ug.U_NAND(self.ug.U_NAND(inp))
+        
 
     def OR(self, *inp):
         """
@@ -62,29 +64,39 @@ class LogicGates:
 
         # Using universal gates
         # return self.ug.U_NOR(self.ug.U_NOR(inp))
+        
 
-    def NAND(self, inp_a=None, inp_b=None):
-        """
-        Logically implements nand gate 
-        """
-        if None in ([inp_a, inp_b]):
-            raise KeyError("input to NAND gate can not be None")
-        if not(inp_a in ([0,1]) and inp_b in ([0,1])):
-            raise KeyError("input to NAND gate should be 0 or 1")
+    def NAND(self, *inp):
 
-        return self.NOT(self.AND(inp_a, inp_b))
+        # Check if no arguments were provided
+        if not inp:
+            raise KeyError("input to NAND gate can not be Empty")
+        
+        # Check if non-binary inputs were provided
+        else:
+            for i in inp:
+                if i not in ([0,1]):
+                    raise KeyError("input to NAND gate should be 0 or 1")
+        
+        # Perform logical NAND operation
+        return 1-prod(inp)
     
-    
-    def NOR(self, inp_a=None, inp_b=None):
-        """
-        Logically implements nor gate 
-        """
-        if None in ([inp_a, inp_b]):
-            raise KeyError("input to NOR gate can not be None")
-        if not(inp_a in ([0,1]) and inp_b in ([0,1])):
-            raise KeyError("input to NOR gate should be 0 or 1")
 
-        return self.NOT(self.OR(inp_a, inp_b))
+    def NOR(self, *inp):
+
+        # Check if no arguments were provided
+        if not inp:
+            raise KeyError("input to NOR gate can not be Empty")
+        
+        # Check if non-binary inputs were provided
+        else:
+            for i in inp:
+                if i not in ([0,1]):
+                    raise KeyError("input to NOR gate should be 0 or 1")
+        
+        # Perform logical NOR operation
+        return (0 if sum(inp) > 0 else 1)
+    
     
     def XOR(self, *inp):
         """
