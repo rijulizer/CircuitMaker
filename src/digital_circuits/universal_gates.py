@@ -15,7 +15,7 @@ class UniversalGates:
         else:
             for i in inp:
                 if i not in ([0,1]):
-                    raise KeyError("input to OR gate should be 0 or 1")
+                    raise KeyError("input to NAND gate should be 0 or 1")
         
         # Perform logical NAND operation
         return 1-prod(inp)
